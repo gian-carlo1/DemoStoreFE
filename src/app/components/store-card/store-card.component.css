@@ -1,0 +1,35 @@
+mat-card {
+	background-color: var(--beige);
+	border-radius: 4px;
+	padding-right: 3%;
+	box-sizing: border-box;
+
+	&:hover {
+		animation: changeColor 0.2s;
+		background-color: var(--dark-beige);
+		cursor: pointer;
+		padding-right: 0;
+	}
+}
+
+@keyframes changeColor {
+	0% {
+		background-color: var(--beige);
+		padding-right: 3%;
+	}
+	100% {
+		background-color: var(--dark-beige);
+		padding-right: 0;
+	}
+}
+
+mat-card-title,
+mat-card-subtitle {
+	color: black;
+}
+
+mat-card-content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
