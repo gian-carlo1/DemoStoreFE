@@ -3,3 +3,8 @@
 	flex-direction: column;
 	gap: 10px;
 }
+
+mat-paginator {
+	background: var(--dark-beige) !important;
+	color: black !important;
+}
