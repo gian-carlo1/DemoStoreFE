@@ -17,9 +17,10 @@
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
-  <div class="list">
+  <div [class]="viewGrid ? 'grid' : 'list'">
     @for (store of storesPaginated; track $index) {
     <app-store-card
+      class="store-card"
       [store]="store"
       (navigate)="onCardNavigate(store)"
     ></app-store-card>
