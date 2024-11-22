@@ -1,20 +1,44 @@
 @use '@angular/material' as mat;
 
-html,
-body {
-	height: 100%;
-}
+:root {
+	--light-green: #b7b7a4;
+	--green: #a5a58d;
+	--dark-green: #6b705c;
+	--light-beige: #ffe8d6;
+	--beige: #ddbea9;
+	--dark-beige: #cb997e;
 
-body {
-	margin: 0;
-	font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+	/* material overrides */
+	color-scheme: light dark;
 
-html {
-  color-scheme: light dark;
   @include mat.theme((
     color: mat.$violet-palette,
     typography: Roboto,
     density: 0
   ));
+
+	@include mat.paginator-overrides((
+    container-text-color: black,
+    container-background-color: var(--green),
+  ));
+
+	@include mat.card-overrides((
+    subtitle-text-color: black,
+    elevated-container-color: var(--dark-beige),
+  ));
+
+	@include mat.button-toggle-overrides((
+    selected-state-background-color: var(--green),
+    shape: 'square'
+  ));
+}
+
+html,
+body {
+	height: 100%;
+	background-color: var(--light-beige);
+}
+
+body {
+	margin: 0;
 }

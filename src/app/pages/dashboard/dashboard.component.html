@@ -1,18 +1,28 @@
-@for (store of storesPaginated; track $index) {
-<app-store-card
-  [store]="store"
-  (navigate)="onCardNavigate(store)"
-></app-store-card>
-}
-<mat-paginator
-  #paginator
-  class="demo-paginator"
-  (page)="handlePageEvent($event)"
-  [length]="length"
-  [pageSize]="pageSize"
-  showFirstLastButtons="'true'"
-  [pageSizeOptions]="[3, 5, 8]"
-  [pageIndex]="pageIndex"
-  aria-label="Select page"
->
-</mat-paginator>
+<div class="dashboard-container">
+  <div class="header">
+    <mat-paginator
+      class="paginator"
+      (page)="handlePageEvent($event)"
+      [length]="length"
+      showFirstLastButtons="true"
+      [pageSizeOptions]="[3, 6, 9]"
+    >
+    </mat-paginator>
+    <mat-button-toggle-group hideSingleSelectionIndicator="true" [value]="viewGrid" (change)="onViewChange($event)">
+      <mat-button-toggle [value]="false">
+			  <mat-icon fontIcon="list"></mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle [value]="true">
+			  <mat-icon fontIcon="grid_view"></mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="list">
+    @for (store of storesPaginated; track $index) {
+    <app-store-card
+      [store]="store"
+      (navigate)="onCardNavigate(store)"
+    ></app-store-card>
+    }
+  </div>
+</div>

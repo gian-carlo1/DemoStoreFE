@@ -1,4 +1,4 @@
-mat-card {
+/* mat-card {
 	border-radius: 4px;
 	padding-right: 3%;
 	box-sizing: border-box;
@@ -23,9 +23,12 @@ mat-card-title,
 mat-card-subtitle {
 	color: black;
 }
-
-mat-card-content {
+ */
+.card-content {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	padding-right: 3%;
+	box-sizing: border-box;
 }

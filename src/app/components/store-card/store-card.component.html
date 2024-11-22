@@ -1,9 +1,11 @@
 <mat-card appearance="raised" (click)="navigateStore()">
   <mat-card-content>
-    <div>
-			<mat-card-title>{{store().data.name}}</mat-card-title>
-    	<mat-card-subtitle>{{store().data.category}}</mat-card-subtitle>
+    <div class="card-content">
+			<div>
+				<mat-card-title>{{store().data.name}}</mat-card-title>
+				<mat-card-subtitle>{{store().data.category}}</mat-card-subtitle>
+			</div>
+			<mat-icon fontIcon="arrow_forward_ios"></mat-icon>
 		</div>
-		<mat-icon fontIcon="arrow_forward_ios"></mat-icon>
   </mat-card-content>
 </mat-card>
