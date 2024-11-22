@@ -8,7 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
+  styleUrl: './dashboard.component.scss',
   imports: [StoreCardComponent, MatPaginator],
   host: { class: 'dashboard' },
   encapsulation: ViewEncapsulation.None,
