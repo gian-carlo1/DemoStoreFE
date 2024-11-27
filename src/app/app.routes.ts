@@ -8,10 +8,12 @@ export const routes: Routes = [
 	},
 	{
 		path: 'dashboard',
-		loadComponent: () => import('./pages/dashboard/dashboard.component').then((m) => m.DashboardComponent)
+		loadComponent: () => import('./pages/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+		children: [
+			{
+				path: 'store/:id',
+				loadComponent: () => import('./pages/store/store.component').then((m) => m.StoreComponent)
+			}
+		]
 	},
-	{
-		path: 'store/:id',
-		loadComponent: () => import('./pages/store/store.component').then((m) => m.StoreComponent)
-	}
 ];

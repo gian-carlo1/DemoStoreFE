@@ -22,13 +22,12 @@
     </mat-button-toggle-group>
   </div>
 
-  <mat-accordion [class]="viewGrid ? 'grid' : 'list'" [multi]="false">
+  <mat-accordion [class]="viewGrid ? 'grid' : 'list'" [multi]="false" [displayMode]="'flat'">
     @for (store of storesPaginated; track $index) {
     <mat-expansion-panel
+      #panel
       hideToggle
-      (opened)="storeSelected = store"
-      (closed)="storeSelected = undefined"
-      [class]="isSelectGrid(store) ? 'selected-grid' : ''"
+      [class]="panel.expanded && viewGrid ? 'selected-grid' : ''"
     >
       <mat-expansion-panel-header expandedHeight="6rem" collapsedHeight="6rem">
         <div class="expansion-header">
@@ -39,7 +38,9 @@
           <mat-icon class="arrow-icon" fontIcon="arrow_forward_ios"></mat-icon>
         </div>
       </mat-expansion-panel-header>
-      <p>prova content {{ store.data.name }}</p>
+	    @if (panel.expanded) {
+        <app-store [store_id]="store.id"></app-store>
+      }
     </mat-expansion-panel>
     }
   </mat-accordion>

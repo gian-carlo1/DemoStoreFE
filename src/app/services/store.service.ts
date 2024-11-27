@@ -20,7 +20,7 @@ export class StoreService {
 
   getStoreById(storeId: string): Promise<StoreData> {
 		const url = `${this.BASE_URL}/${storeId}`
-		return firstValueFrom(this.http.delete<StoreData>(url))
+		return firstValueFrom(this.http.get<StoreData>(url))
 	}
 
   getStoreProducts(storeId: string): Promise<Product[]> {

@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { StoreComponent } from '../store/store.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,13 +16,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatButtonToggleModule,
     MatIconModule,
     MatExpansionModule,
+    StoreComponent
   ],
 })
 export class DashboardComponent implements OnInit {
-  storeService = inject(StoreService);
+  private storeService = inject(StoreService);
 
   stores: Store[] = [];
-  storeSelected: Store | undefined;
 
   storesPaginated: Store[] = [];
   length = 0;
@@ -55,11 +56,6 @@ export class DashboardComponent implements OnInit {
   }
 
   onViewChange(event: any) {
-    this.storeSelected = undefined;
     this.viewGrid = event.value;
-  }
-
-  isSelectGrid(store: Store) {
-    return this.storeSelected?.id == store.id && this.viewGrid;
   }
 }
