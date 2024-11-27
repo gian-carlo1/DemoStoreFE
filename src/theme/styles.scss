@@ -22,11 +22,6 @@
     container-background-color: var(--green),
   ));
 
-	@include mat.card-overrides((
-    subtitle-text-color: black,
-    elevated-container-color: var(--dark-beige),
-  ));
-
 	@include mat.button-toggle-overrides((
     selected-state-background-color: var(--green),
     shape: 'square'

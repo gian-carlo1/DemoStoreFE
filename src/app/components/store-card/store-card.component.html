@@ -1,11 +1,16 @@
-<mat-card class="card" appearance="raised" (click)="navigateStore()">
-  <mat-card-content>
-    <div class="card-content">
-			<div>
-				<mat-card-title>{{store().data.name}}</mat-card-title>
-				<mat-card-subtitle>{{store().data.category}}</mat-card-subtitle>
-			</div>
-			<mat-icon fontIcon="arrow_forward_ios"></mat-icon>
-		</div>
-  </mat-card-content>
-</mat-card>
+<mat-expansion-panel
+  hideToggle
+  (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false"
+>
+  <mat-expansion-panel-header expandedHeight="6rem" collapsedHeight="6rem">
+    <div class="header">
+      <div>
+        <p class="title">{{ store().data.name }}</p>
+        <p class="subtitle">{{ store().data.category }}</p>
+      </div>
+      <mat-icon class="arrow-icon" fontIcon="arrow_forward_ios"></mat-icon>
+    </div>
+  </mat-expansion-panel-header>
+  <p>prova content {{ store().data.name }}</p>
+</mat-expansion-panel>

@@ -1,60 +1,65 @@
 import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '../../models/store';
 import { StoreService } from '../../services/store.service';
-import { StoreCardComponent } from '../../components/store-card/store-card.component';
-import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
-  imports: [StoreCardComponent, MatPaginator, MatButtonToggleModule, MatIconModule],
+  imports: [
+    MatPaginator,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatExpansionModule,
+  ],
 })
 export class DashboardComponent implements OnInit {
   storeService = inject(StoreService);
-  router = inject(Router);
 
   stores: Store[] = [];
-  storesPaginated: Store[] = []
+  storeSelected: Store | undefined;
 
+  storesPaginated: Store[] = [];
   length = 0;
+  pageSizeOptions = [5, 10, 15];
 
-  viewGrid = false
+  viewGrid = false;
 
   async ngOnInit() {
     this.stores = await this.storeService.getStores();
 
-
+    /* TEST VALUES */
     for (let index = 0; index < 20; index++) {
       const testValue: Store = {
-        ...this.stores[0],
+        id: `testValue${index}`,
         data: {
           ...this.stores[0].data,
-          name: `testValue${index}`
-        }
-      }
+          name: `testValue${index}`,
+        },
+      };
       this.stores.push(testValue);
     }
 
-
     this.length = this.stores.length;
-    this.storesPaginated = this.stores.slice(0, 3)
-  }
-
-  onCardNavigate(store: Store) {
-    this.router.navigate([`/store/${store.id}`]);
+    this.storesPaginated = this.stores.slice(0, this.pageSizeOptions[0]);
   }
 
   handlePageEvent(event: any) {
-    const start = event.pageIndex * event.pageSize
-    const end = (event.pageIndex + 1) * event.pageSize
-    this.storesPaginated = this.stores.slice(start, end)
+    const start = event.pageIndex * event.pageSize;
+    const end = (event.pageIndex + 1) * event.pageSize;
+    this.storesPaginated = this.stores.slice(start, end);
   }
 
   onViewChange(event: any) {
-    this.viewGrid = event.value
+    this.storeSelected = undefined;
+    this.viewGrid = event.value;
+  }
+
+  isSelectGrid(store: Store) {
+    return this.storeSelected?.id == store.id && this.viewGrid;
   }
 }

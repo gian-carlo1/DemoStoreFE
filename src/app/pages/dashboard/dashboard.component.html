@@ -5,25 +5,42 @@
       (page)="handlePageEvent($event)"
       [length]="length"
       showFirstLastButtons="true"
-      [pageSizeOptions]="[3, 6, 9]"
+      [pageSizeOptions]="pageSizeOptions"
     >
     </mat-paginator>
-    <mat-button-toggle-group hideSingleSelectionIndicator="true" [value]="viewGrid" (change)="onViewChange($event)">
+    <mat-button-toggle-group
+      hideSingleSelectionIndicator="true"
+      [value]="viewGrid"
+      (change)="onViewChange($event)"
+    >
       <mat-button-toggle [value]="false">
-			  <mat-icon fontIcon="list"></mat-icon>
+        <mat-icon fontIcon="list"></mat-icon>
       </mat-button-toggle>
       <mat-button-toggle [value]="true">
-			  <mat-icon fontIcon="grid_view"></mat-icon>
+        <mat-icon fontIcon="grid_view"></mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
-  <div [class]="viewGrid ? 'grid' : 'list'">
+
+  <mat-accordion [class]="viewGrid ? 'grid' : 'list'" [multi]="false">
     @for (store of storesPaginated; track $index) {
-    <app-store-card
-      class="store-card"
-      [store]="store"
-      (navigate)="onCardNavigate(store)"
-    ></app-store-card>
+    <mat-expansion-panel
+      hideToggle
+      (opened)="storeSelected = store"
+      (closed)="storeSelected = undefined"
+      [class]="isSelectGrid(store) ? 'selected-grid' : ''"
+    >
+      <mat-expansion-panel-header expandedHeight="6rem" collapsedHeight="6rem">
+        <div class="expansion-header">
+          <div>
+            <p>{{ store.data.name }}</p>
+            <p>{{ store.data.category }}</p>
+          </div>
+          <mat-icon class="arrow-icon" fontIcon="arrow_forward_ios"></mat-icon>
+        </div>
+      </mat-expansion-panel-header>
+      <p>prova content {{ store.data.name }}</p>
+    </mat-expansion-panel>
     }
-  </div>
+  </mat-accordion>
 </div>
