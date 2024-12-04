@@ -1,0 +1,30 @@
+.mat-mdc-paginator {
+	background-color: var(--light-beige) !important	;
+}
+
+.tab-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+
+	position: relative;
+	align-items: center;
+}
+
+.table-container {
+	width: 100%;
+	height: 85%;
+	
+	overflow: auto;
+	scrollbar-width: thin;
+}
+
+.fixed-bottom {
+	position: absolute;
+	bottom: 0;
+}
+
+.paginator {
+	border: 1px black solid;
+}

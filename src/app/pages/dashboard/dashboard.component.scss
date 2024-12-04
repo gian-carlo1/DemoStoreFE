@@ -45,6 +45,10 @@
   }
 }
 
+.expansion-panel {
+  height: 40rem;
+}
+
 .mat-expansion-panel-header {
   color: black;
   background: var(--beige);
@@ -77,4 +81,8 @@ mat-expansion-panel-header.mat-expanded:focus {
 
 .mat-expansion-panel {
   border-radius: 8px !important;
+}
+
+::ng-deep .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-content {
+  display: none !important;
 }

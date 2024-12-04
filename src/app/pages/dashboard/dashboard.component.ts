@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
   private storeService = inject(StoreService);
 
   stores: Store[] = [];
-
   storesPaginated: Store[] = [];
+  
   length = 0;
   pageSizeOptions = [5, 10, 15];
 

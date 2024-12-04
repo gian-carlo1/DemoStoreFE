@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
 import { Store, StoreData } from '../../models/store';
 import { StoreService } from '../../services/store.service';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -15,9 +15,13 @@ export class StoreComponent implements OnInit {
   private storeService = inject(StoreService);
 
   store_id = input.required<string>();
-  store: StoreData | undefined;
+  store = signal<StoreData | null>(null);
+
+  employees = computed((): string[] => {
+    return this.store() ? this.store()?.employees! : []
+  })
 
   async ngOnInit() {
-    this.store = await this.storeService.getStoreById(this.store_id());
+    this.store.set(await this.storeService.getStoreById(this.store_id()));
   }
 }

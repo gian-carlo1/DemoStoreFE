@@ -9,7 +9,11 @@
   <mat-tab #employeesTab label="Employees">
 		@if (!employeesTab.disabled) {
 			<div class="tab-content">
-				<app-employees-tab></app-employees-tab>
+				@if(employees().length > 0) {
+					<app-employees-tab [employees]="employees()"></app-employees-tab>
+				} @else {
+					<p>Nessun impiegato presente</p>	
+				}
 			</div>
 		}
 	</mat-tab>
