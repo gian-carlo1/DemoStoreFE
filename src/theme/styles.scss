@@ -26,6 +26,10 @@
     selected-state-background-color: var(--green),
     shape: 'square'
   ));
+
+	@include mat.progress-spinner-overrides((
+    active-indicator-color: var(--light-green),
+  ));
 }
 
 html,
