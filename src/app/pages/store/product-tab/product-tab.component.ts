@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductModalComponent } from './product-modal/product-modal.component';
+import { ConfirmDialogComponent } from '../../../core/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-product-tab',
@@ -48,9 +49,9 @@ export class ProductTabComponent implements OnInit {
 
   openDialog(product_id?: string) {
     const dialogRef = this.dialog.open(ProductModalComponent, {
-      width: '100rem',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',
+      autoFocus: false,
       data: {
         store_id: this.store_id(),
         product_id: product_id ? product_id : null,
@@ -59,6 +60,21 @@ export class ProductTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        this.initProducts();
+      }
+    });
+  }
+
+  deleteProduct(product_id: string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      enterAnimationDuration: '200ms',
+      exitAnimationDuration: '200ms',
+      autoFocus: false
+    })
+
+    dialogRef.afterClosed().subscribe(async (confirm) => {
+      if (confirm) {
+        const res = await this.storeService.deleteStoreProduct(this.store_id(), product_id)
         this.initProducts();
       }
     });
