@@ -1,0 +1,69 @@
+<div class="form-container">
+  <form
+    action=""
+    class="form"
+    [formGroup]="productForm"
+    (ngSubmit)="onSubmit($event)"
+  >
+    <mat-form-field floatLabel="always">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        required
+        name="title"
+        formControlName="title"
+        [readonly]="editDisabled"
+      />
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Category</mat-label>
+      <input
+        matInput
+        required
+        name="category"
+        formControlName="category"
+        [readonly]="editDisabled"
+      />
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        required
+        name="price"
+        type="number"
+        formControlName="price"
+        [readonly]="editDisabled"
+      />
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Employee</mat-label>
+      <input
+        matInput
+        name="employee"
+        formControlName="employee"
+        [readonly]="editDisabled"
+      />
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        name="description"
+        [rows]="5"
+        formControlName="description"
+        [readonly]="editDisabled"
+      ></textarea>
+    </mat-form-field>
+
+    @if (!editDisabled) {
+    <div class="button-container">
+      <button mat-flat-button type="submit" [disabled]="productForm.invalid">Salva</button>
+    </div>
+    }
+  </form>
+</div>

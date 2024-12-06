@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Store, StoreData } from '../models/store';
@@ -35,9 +35,8 @@ export class StoreService {
 
   createStoreProduct(storeId: string, product: Product) {
 		const url = `${this.BASE_URL}/${storeId}/products`
-		const body = {product}
 
-		return firstValueFrom(this.http.post(url, body))
+		return firstValueFrom(this.http.post(url, product.data, {responseType: 'text'}))
 	}
 
   deleteStoreProduct(storeId: string, productId: string) {

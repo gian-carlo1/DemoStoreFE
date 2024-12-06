@@ -37,3 +37,8 @@ body {
 body {
 	margin: 0;
 }
+
+.mat-mdc-row:hover {
+	transition: 0.2s;
+	background-color: var(--light-green) !important;
+}

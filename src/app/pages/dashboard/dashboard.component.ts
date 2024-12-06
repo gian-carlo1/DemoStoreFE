@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
     this.stores = await this.storeService.getStores();
 
     /* TEST VALUES */
-    for (let index = 0; index < 20; index++) {
+    /* for (let index = 0; index < 20; index++) {
       const testValue: Store = {
         id: `testValue${index}`,
         data: {
@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
         },
       };
       this.stores.push(testValue);
-    }
+    } */
 
     this.length = this.stores.length;
     this.storesPaginated = this.stores.slice(0, this.pageSizeOptions[0]);

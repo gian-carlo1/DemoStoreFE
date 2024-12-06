@@ -2,7 +2,7 @@
   <mat-tab #productsTab label="Products">
 		@if (!productsTab.disabled) {
 			<div class="tab-content">
-				<app-product-tab></app-product-tab>
+				<app-product-tab [store_id]="store_id()"></app-product-tab>
 			</div>
 		}
 	</mat-tab>
