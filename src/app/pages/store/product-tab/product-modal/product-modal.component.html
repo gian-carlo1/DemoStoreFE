@@ -1,69 +1,104 @@
-<div class="form-container">
-  <form
-    action=""
-    class="form"
-    [formGroup]="productForm"
-    (ngSubmit)="onSubmit($event)"
-  >
-    <mat-form-field floatLabel="always">
-      <mat-label>Title</mat-label>
-      <input
-        matInput
-        required
-        name="title"
-        formControlName="title"
-        [readonly]="editDisabled"
-      />
-    </mat-form-field>
+<mat-dialog-content>
+  <form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit($event)">
+    <mat-tab-group>
+      <mat-tab label="Product data">
+        <mat-form-field floatLabel="always">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            required
+            name="title"
+            formControlName="title"
+            [readonly]="editDisabled"
+          />
+        </mat-form-field>
 
-    <mat-form-field floatLabel="always">
-      <mat-label>Category</mat-label>
-      <input
-        matInput
-        required
-        name="category"
-        formControlName="category"
-        [readonly]="editDisabled"
-      />
-    </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Category</mat-label>
+          <input
+            matInput
+            required
+            name="category"
+            formControlName="category"
+            [readonly]="editDisabled"
+          />
+        </mat-form-field>
 
-    <mat-form-field floatLabel="always">
-      <mat-label>Price</mat-label>
-      <input
-        matInput
-        required
-        name="price"
-        type="number"
-        formControlName="price"
-        [readonly]="editDisabled"
-      />
-    </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Price</mat-label>
+          <input
+            matInput
+            required
+            name="price"
+            type="number"
+            formControlName="price"
+            [readonly]="editDisabled"
+          />
+        </mat-form-field>
 
-    <mat-form-field floatLabel="always">
-      <mat-label>Employee</mat-label>
-      <input
-        matInput
-        name="employee"
-        formControlName="employee"
-        [readonly]="editDisabled"
-      />
-    </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Employee</mat-label>
+          <input
+            matInput
+            name="employee"
+            formControlName="employee"
+            [readonly]="editDisabled"
+          />
+        </mat-form-field>
 
-    <mat-form-field floatLabel="always">
-      <mat-label>Description</mat-label>
-      <textarea
-        matInput
-        name="description"
-        [rows]="5"
-        formControlName="description"
-        [readonly]="editDisabled"
-      ></textarea>
-    </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            name="description"
+            [rows]="5"
+            formControlName="description"
+            [readonly]="editDisabled"
+          ></textarea>
+        </mat-form-field>
+      </mat-tab>
+
+      <mat-tab label="Reviews">
+        @for (rev of reviews; track $index) {
+        <div class="review-container">
+          <mat-form-field appearance="outline">
+            <textarea
+              [rows]="5"
+              matInput
+              [(ngModel)]="reviews[$index]"
+              [ngModelOptions]="{standalone: true}"
+              [readonly]="editDisabled"
+            ></textarea>
+          </mat-form-field>
+          @if (!editDisabled) {
+          <button
+            type="button"
+            mat-icon-button
+            (click)="deleteReview($index, $event)"
+          >
+            <mat-icon class="delete-icon">delete</mat-icon>
+          </button>
+          }
+        </div>
+        }
+        @if (!editDisabled) {
+        <mat-card appearance="outlined">
+          <mat-card-content class="card-add">
+            <button type="button" mat-icon-button (click)="addReview($event)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-card-content>
+        </mat-card>
+        }
+      </mat-tab>
+    </mat-tab-group>
 
     @if (!editDisabled) {
     <div class="button-container">
-      <button mat-flat-button type="submit" [disabled]="productForm.invalid">Salva</button>
+      <button mat-flat-button type="submit" [disabled]="productForm.invalid">
+        Salva
+      </button>
     </div>
     }
   </form>
-</div>
+</mat-dialog-content>

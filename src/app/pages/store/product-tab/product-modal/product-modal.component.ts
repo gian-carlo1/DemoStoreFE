@@ -1,18 +1,26 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { StoreService } from '../../../../services/store.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {
+  FormArray,
   FormControl,
   FormGroup,
   FormsModule,
+  NgModel,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Product, ProductData } from '../../../../models/product';
+import { ProductData } from '../../../../models/product';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-product-modal',
@@ -26,11 +34,14 @@ import { Product, ProductData } from '../../../../models/product';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatCardModule,
   ],
 })
 export class ProductModalComponent implements OnInit {
   data = inject(MAT_DIALOG_DATA);
-  dialogRef = inject(MatDialogRef)
+  dialogRef = inject(MatDialogRef);
   storeService = inject(StoreService);
 
   productForm = new FormGroup({
@@ -39,8 +50,8 @@ export class ProductModalComponent implements OnInit {
     price: new FormControl(0, { validators: [Validators.required] }),
     employee: new FormControl(''),
     description: new FormControl(''),
-    reviews: new FormControl([]),
   });
+  reviews: string[] = []
   editDisabled: boolean = false;
 
   async ngOnInit() {
@@ -66,19 +77,30 @@ export class ProductModalComponent implements OnInit {
         description: new FormControl(
           product.description ? product.description : ''
         ),
-        reviews: new FormControl([]),
       });
+      this.reviews = product.reviews ? product.reviews : []
     }
   }
 
   async onSubmit(event: any) {
     const res = await this.storeService.createStoreProduct(this.data.store_id, {
       id: this.data.product_id,
-      data: this.productForm.value as ProductData,
+      data: {
+        ...this.productForm.value,
+        reviews: this.reviews
+      } as ProductData,
     });
 
-    this.dialogRef.close(res)
+    this.dialogRef.close(res);
   }
 
-  deleteItem() {}
+  addReview(event: any) {
+    event.stopPropagation();
+    this.reviews.push('');
+  }
+
+  deleteReview(index: any, event: any) {
+    event.stopPropagation();
+    this.reviews.splice(index, 1);
+  }
 }
